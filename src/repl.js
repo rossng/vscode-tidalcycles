@@ -5,6 +5,7 @@ const Range = vscode.Range;
 const expression = require('./expression');
 const config = require('./config');
 const postUriScheme = "tidalcycles";
+const grammarOutput = require('./grammarOutput');
 
 let repl, postChannel, evalCount = 0, booted = false;
 
@@ -89,7 +90,18 @@ function eval(isMultiline) {
             feedback(block.range);
             incrementEvalCount();
             showRandomMessage();
+            return showGrammarOutput();
         });
+}
+
+function showGrammarOutput() {
+    if (config.showTraceryInOutput()) {
+        return grammarOutput.makeGrammar()
+            .then(text => {
+                return post(`${text} `);
+            });
+    }
+    return Promise.resolve();
 }
 
 function incrementEvalCount() {

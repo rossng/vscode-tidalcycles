@@ -51,3 +51,16 @@ exports.useBootFileInCurrentDirectory = () => {
     var value = getConfiguration(configSection).get('useBootFileInCurrentDirectory');
     return value == true;
 };
+
+
+//// experimental ////
+
+exports.traceryPath = () => {
+    if (!getConfiguration(configSection).has('traceryPath')) return "";
+    return getConfiguration(configSection).get('traceryPath');
+}
+
+exports.showTraceryInOutput = () => {
+    if (!getConfiguration(configSection).has('showTraceryInOutput')) return false;
+    return getConfiguration(configSection).get('showTraceryInOutput');
+}

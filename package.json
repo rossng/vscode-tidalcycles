@@ -1,114 +1,117 @@
 {
-    "name": "vscode-tidalcycles",
-    "displayName": "TidalCycles for VSCode",
-    "description": "TidalCycles support in VSCode",
-    "version": "0.5.8",
-    "publisher": "tidalcycles",
-    "icon": "images/icon128.png",
-    "repository": "https://github.com/kindohm/vscode-tidalcycles",
-    "engines": {
-        "vscode": "^1.5.0"
-    },
-    "categories": [
-        "Other"
+  "name": "vscode-tidalcycles",
+  "displayName": "TidalCycles for VSCode",
+  "description": "TidalCycles support in VSCode",
+  "version": "0.5.8",
+  "publisher": "tidalcycles",
+  "icon": "images/icon128.png",
+  "repository": "https://github.com/kindohm/vscode-tidalcycles",
+  "engines": {
+    "vscode": "^1.5.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:tidal.eval",
+    "onCommand:tidal.evalMulti",
+    "onCommand:tidal.hush"
+  ],
+  "main": "./src/tidal",
+  "contributes": {
+    "commands": [
+      {
+        "command": "tidal.eval",
+        "title": "Tidal Eval"
+      },
+      {
+        "command": "tidal.evalMulti",
+        "title": "Tidal Eval Multiline"
+      },
+      {
+        "command": "tidal.hush",
+        "title": "Tidal Hush"
+      }
     ],
-    "activationEvents": [
-        "onCommand:tidal.eval",
-        "onCommand:tidal.evalMulti",
-        "onCommand:tidal.hush"
+    "keybindings": [
+      {
+        "command": "tidal.eval",
+        "key": "Shift+Enter"
+      },
+      {
+        "command": "tidal.evalMulti",
+        "key": "Ctrl+Enter"
+      },
+      {
+        "command": "tidal.hush",
+        "key": "Ctrl+Alt+H"
+      }
     ],
-    "main": "./src/tidal",
-    "contributes": {
-        "commands": [
-            {
-                "command": "tidal.eval",
-                "title": "Tidal Eval"
-            },
-            {
-                "command": "tidal.evalMulti",
-                "title": "Tidal Eval Multiline"
-            },
-            {
-                "command": "tidal.hush",
-                "title": "Tidal Hush"
-            }
-        ],
-        "keybindings": [
-            {
-                "command": "tidal.eval",
-                "key": "Shift+Enter"
-            },
-            {
-                "command": "tidal.evalMulti",
-                "key": "Ctrl+Enter"
-            },
-            {
-                "command": "tidal.hush",
-                "key": "Ctrl+Alt+H"
-            }
-        ],
-        "configuration": {
-            "type": "object",
-            "title": "TidalCycles Configuration",
-            "properties": {
-                "tidalcycles.bootTidalPath": {
-                    "type": "string",
-                    "default": "",
-                    "description": "The file system path to a file that contains Tidal bootup code."
-                },
-                "tidalcycles.feedbackColor": {
-                    "type": "string",
-                    "default": "rgba(100,250,100,0.3)",
-                    "description": "The highlight color to use when evaluating Tidal code."
-                },
-                "tidalcycles.ghciPath": {
-                    "type": "string",
-                    "default": "ghci",
-                    "description": "The path or command used to run ghci."
-                },
-                "tidalcycles.randomMessageProbability": {
-                    "type": "number",
-                    "default": 0,
-                    "description": "Probability between 0 and 1 of whether a random message will be shown per eval in the output."
-                },
-                "tidalcycles.randomMessages": {
-                    "type": "array",
-                    "default": [],
-                    "description": "An array of strings of random messages."
-                },
-                "tidalcycles.showEvalCount": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Show an incremented count of evaluations in the console output on each eval."
-                },
-                "tidalcycles.showGhciOutput": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Display the standard output from GHCI in the console."
-                },
-                "tidalcycles.showOutputInConsoleChannel": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Show Tidal output in a VS Code output panel."
-                },
-                "tidalcycles.useBootFileInCurrentDirectory": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Specifies whether to use a BootTidal.hs file located in the current folder or first folder of the opened workspace."
-                }
-            }
+    "configuration": {
+      "type": "object",
+      "title": "TidalCycles Configuration",
+      "properties": {
+        "tidalcycles.bootTidalPath": {
+          "type": "string",
+          "default": "",
+          "description": "The file system path to a file that contains Tidal bootup code."
+        },
+        "tidalcycles.feedbackColor": {
+          "type": "string",
+          "default": "rgba(100,250,100,0.3)",
+          "description": "The highlight color to use when evaluating Tidal code."
+        },
+        "tidalcycles.ghciPath": {
+          "type": "string",
+          "default": "ghci",
+          "description": "The path or command used to run ghci."
+        },
+        "tidalcycles.randomMessageProbability": {
+          "type": "number",
+          "default": 0,
+          "description": "Probability between 0 and 1 of whether a random message will be shown per eval in the output."
+        },
+        "tidalcycles.randomMessages": {
+          "type": "array",
+          "default": [],
+          "description": "An array of strings of random messages."
+        },
+        "tidalcycles.showEvalCount": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show an incremented count of evaluations in the console output on each eval."
+        },
+        "tidalcycles.showGhciOutput": {
+          "type": "boolean",
+          "default": true,
+          "description": "Display the standard output from GHCI in the console."
+        },
+        "tidalcycles.showOutputInConsoleChannel": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show Tidal output in a VS Code output panel."
+        },
+        "tidalcycles.useBootFileInCurrentDirectory": {
+          "type": "boolean",
+          "default": false,
+          "description": "Specifies whether to use a BootTidal.hs file located in the current folder or first folder of the opened workspace."
         }
-    },
-    "scripts": {
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "typescript": "^2.0.3",
-        "vscode": "^1.0.0",
-        "mocha": "^2.3.3",
-        "eslint": "^3.6.0",
-        "@types/node": "^6.0.40",
-        "@types/mocha": "^2.2.32"
+      }
     }
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^2.0.3",
+    "vscode": "^1.0.0",
+    "mocha": "^2.3.3",
+    "eslint": "^3.6.0",
+    "@types/node": "^6.0.40",
+    "@types/mocha": "^2.2.32"
+  },
+  "dependencies": {
+    "tracery-grammar": "2.7.3"
+  }
 }
