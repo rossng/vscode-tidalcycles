@@ -32,7 +32,7 @@ export class Repl implements IRepl {
         }
 
         await this.tidal.sendTidalExpression('hush');
-        this.history.log(new TidalExpression('hush', new vscode.Range(0, 0, 0, 0)));
+        this.history.log(TidalExpression.create('hush', new vscode.Range(0, 0, 0, 0)));
     }
 
     public async evaluate(isMultiline: boolean) {

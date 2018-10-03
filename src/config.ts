@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
 
 export class Config {
-    getConfiguration = vscode.workspace.getConfiguration;
-    configSection: string = 'tidalcycles';
+    private readonly getConfiguration = vscode.workspace.getConfiguration;
+    private readonly configSection: string = 'tidalcycles';
 
     public bootTidalPath(): string | null {
         return this.getConfiguration(this.configSection).get('bootTidalPath', null);

@@ -11,6 +11,10 @@ This VSCode extension for TidalCycles is inspired by the commands from the popul
 - `Ctrl+Enter` to evaluate multiple lines
 - `Ctrl+Alt+H` to hush
 
+Commands:
+
+- `Tidal: Show command history` opens a document listing the Tidal expressions evaluated during the current session.
+
 ## Syntax Highlighting
 
 In order to get syntax highlighting in `.tidal` files you must do

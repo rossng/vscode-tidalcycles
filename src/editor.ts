@@ -4,12 +4,13 @@ import {Range, TextEditor, TextDocument, } from 'vscode';
  * Represents a single expression to be executed by Tidal.
  */
 export class TidalExpression {
-    public readonly expression: string;
-    public readonly range: Range;
+    constructor(
+        public readonly expression: string,
+        public readonly range: Range,
+        public readonly time: number) {}
 
-    constructor(expression: string, range: Range) {
-        this.expression = expression;
-        this.range = range;
+    static create(expression: string, range: Range): TidalExpression {
+        return new TidalExpression(expression, range, Date.now());
     }
 }
 
@@ -89,7 +90,7 @@ export class TidalEditor {
         if (!getMultiline) {
             if (this.isEmpty(document, position.line)) { return null; }
             let range = new Range(line.lineNumber, 0, line.lineNumber, line.text.length);
-            return new TidalExpression(line.text, range);
+            return TidalExpression.create(line.text, range);
         }
 
         // If there is a multi-line expression
@@ -104,6 +105,6 @@ export class TidalEditor {
 
         let range = new Range(startLineNumber, 0, endLineNumber, endCol);
 
-        return new TidalExpression(document.getText(range), range);
+        return TidalExpression.create(document.getText(range), range);
     }    
 }

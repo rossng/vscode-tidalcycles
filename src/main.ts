@@ -35,28 +35,32 @@ export function activate(context: ExtensionContext) {
         logger.warning(`GHCi | ${data}`);
     });
 
-    const evalSingle = commands.registerCommand('tidal.eval', function () {
+    const evalSingleCommand = commands.registerCommand('tidal.eval', function () {
         const repl = getRepl(repls, window.activeTextEditor);
         if (repl !== undefined) {
             repl.evaluate(false);
         }
     });
 
-    const evalMulti = commands.registerCommand('tidal.evalMulti', function () {
+    const evalMultiCommand = commands.registerCommand('tidal.evalMulti', function () {
         const repl = getRepl(repls, window.activeTextEditor);
         if (repl !== undefined) {
             repl.evaluate(true);
         }
     });
 
-    const hush = commands.registerCommand('tidal.hush', function () {
+    const hushCommand = commands.registerCommand('tidal.hush', function () {
         const repl = getRepl(repls, window.activeTextEditor);
         if (repl !== undefined) {
             repl.hush();
         }
     });
 
-    context.subscriptions.push(evalSingle, evalMulti, hush);
+    const historyCommand = commands.registerCommand('tidal.showHistory', async function() {
+        await history.showHistory();
+    });
+
+    context.subscriptions.push(evalSingleCommand, evalMultiCommand, hushCommand, historyCommand);
 }
 
 export function deactivate() { }

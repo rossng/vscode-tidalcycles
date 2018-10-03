@@ -1,6 +1,7 @@
 import { TidalExpression } from './editor';
 import { ILogger } from './logging';
 import { Config } from './config';
+import * as vscode from 'vscode';
 
 /**
  * Logs the history of a Tidal session.
@@ -11,19 +12,28 @@ export interface IHistory {
 }
 
 export class History implements IHistory {
-    private evalCount: number = 0;
+    private expressions: TidalExpression[] = [];
 
-    constructor(private logger: ILogger, private config: Config) {
+    constructor(private readonly logger: ILogger, private readonly config: Config) {
     }
 
     public log(expression: TidalExpression): void {
-        this.evalCount++;
+        this.expressions.push(expression);
         if (this.config.showEvalCount()) {
-            this.logger.log(`Evals: ${this.evalCount}`);
+            this.logger.log(`Evals: ${this.getEvalCount()}`);
         }
     }
 
     public getEvalCount(): number {
-        return this.evalCount;
+        return this.expressions.length;
+    }
+
+    public async showHistory() {
+        const eol = vscode.workspace.getConfiguration('files', null).get('eol', '\n');
+        const history = this.expressions.reduce((text: string, expression: TidalExpression) => {
+            return text + expression.expression + eol + eol;
+        }, '');
+        let document = await vscode.workspace.openTextDocument({ content: history });
+        vscode.window.showTextDocument(document);
     }
 }

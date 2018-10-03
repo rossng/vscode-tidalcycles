@@ -23,15 +23,19 @@
         "commands": [
             {
                 "command": "tidal.eval",
-                "title": "Tidal Eval"
+                "title": "Tidal: Evaluate single line"
             },
             {
                 "command": "tidal.evalMulti",
-                "title": "Tidal Eval Multiline"
+                "title": "Tidal: Evaluate multiple lines"
             },
             {
                 "command": "tidal.hush",
-                "title": "Tidal Hush"
+                "title": "Tidal: Hush"
+            },
+            {
+                "command": "tidal.showHistory",
+                "title": "Tidal: Show command history"
             }
         ],
         "keybindings": [
@@ -66,16 +70,6 @@
                     "type": "string",
                     "default": "ghci",
                     "description": "The path or command used to run ghci."
-                },
-                "tidalcycles.randomMessageProbability": {
-                    "type": "number",
-                    "default": 0,
-                    "description": "Probability between 0 and 1 of whether a random message will be shown per eval in the output."
-                },
-                "tidalcycles.randomMessages": {
-                    "type": "array",
-                    "default": [],
-                    "description": "An array of strings of random messages."
                 },
                 "tidalcycles.showEvalCount": {
                     "type": "boolean",
