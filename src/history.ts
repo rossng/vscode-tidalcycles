@@ -9,6 +9,8 @@ import * as vscode from 'vscode';
 export interface IHistory {
     getEvalCount(): number;
     log(expression: TidalExpression): void;
+    historyToString(): string;
+    showHistory(): Promise<void>;
 }
 
 export class History implements IHistory {
@@ -28,12 +30,17 @@ export class History implements IHistory {
         return this.expressions.length;
     }
 
-    public async showHistory() {
+    public historyToString(): string {
         const eol = vscode.workspace.getConfiguration('files', null).get('eol', '\n');
-        const history = this.expressions.reduce((text: string, expression: TidalExpression) => {
-            return text + expression.expression + eol + eol;
-        }, '');
-        let document = await vscode.workspace.openTextDocument({ content: history });
+        return this.expressions
+            .sort((a, b) => a.time - b.time)
+            .reduce((text: string, expression: TidalExpression) => {
+                return text + expression.expression + eol + eol;
+            }, '');
+    }
+
+    public async showHistory() {
+        let document = await vscode.workspace.openTextDocument({ content: this.historyToString() });
         vscode.window.showTextDocument(document);
     }
 }
