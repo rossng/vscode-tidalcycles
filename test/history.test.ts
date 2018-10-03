@@ -29,7 +29,7 @@ suite('History', () => {
         history.log(new TidalExpression('denholm', new Range(0, 0, 0, 0), 20));
 
         expect(history.getEvalCount()).to.equal(4);
-        expect(history.historyToString().split('\r\n').filter(l => l.length > 0)).to.deep.equal(
+        expect(history.historyToString().split(/[\r\n]+/).filter(l => l.length > 0)).to.deep.equal(
             ['maurice', 'jen', 'roy', 'denholm']
         );
     });
